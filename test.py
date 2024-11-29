@@ -1,6 +1,6 @@
 from Graph import Graph
 
-filename = "C:/Users/Diogenes/PycharmProjects/RelationalDatabaseCascadeDeletionAnalyzer/input.txt"
+filename = "file/path"
 
 graph = Graph()
 
