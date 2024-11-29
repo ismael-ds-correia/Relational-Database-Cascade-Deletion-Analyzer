@@ -54,7 +54,32 @@ class Graph:
 
         return graph
 
+    def cascade_effect(self, vertex):
+        """Calcula os nós que seriam excluídos em cascata caso `vertex` seja deletado."""
+        excluded = set()
+        stack = [vertex]
 
+        while stack:
+            v = stack.pop()
+            if v.name not in excluded:
+                excluded.add(v.name)
+                for adj in v.adjacency_list:
+                    stack.append(adj)
+
+        return excluded
+
+    def show_cascade_effects(self):
+        """Mostra as consequências da exclusão de cada nó."""
+        effects = {}
+        for vertex in self.vertices:
+            excluded = self.cascade_effect(vertex)
+            effects[vertex.name] = excluded
+
+        # Exibe o resultado para cada nó
+        for vertex_name, excluded in effects.items():
+            print(f"Se o vértice {vertex_name} for excluído, os seguintes vértices serão deletados em cascata:")
+            print(", ".join(excluded))
+            print("-" * 40)
 
 
 
